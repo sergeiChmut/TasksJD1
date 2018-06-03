@@ -1,4 +1,4 @@
-package com.company.lecture1.Objects;
+package com.lectures.lecture3_4;
 
 /**
  * Класс описывающий банкомат

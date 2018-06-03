@@ -1,4 +1,4 @@
-package com.company.lecture1.Objects;
+package com.lectures.lecture6;
 
 /**
  * 1. Создать класс Hero, представляющий собой героя и содержащий поле name.
@@ -34,22 +34,29 @@ package com.company.lecture1.Objects;
  */
 public class TrainingGround {
     public static void main(String[] args) {
-        Hero hero=new Hero("Sergei");// Task1
-        Enemy enemy=new Enemy(200);
+        //Hero hero=new Hero("Sergei");// Task1
+        Enemy enemy=new Enemy(200, "Enemy");
         System.out.println("Health of Enemy:"+enemy.getHealth());
-        hero.attackEnemy(enemy);
+        //hero.attackEnemy(enemy);
 
-        System.out.println("Health of Enemy:"+enemy.getHealth());
-        Mage mage=new Mage( "Pavel"); //Task2
+        //System.out.println("Health of Enemy:"+enemy.getHealth());
+        Mage mage=new Mage( "Mage");//Task2
         mage.attackEnemy(enemy);
         System.out.println("Health of Enemy:"+enemy.getHealth());
-        Warrior warrior=new Warrior("Denis");
+        Warrior warrior=new Warrior("Warrior");
         warrior.attackEnemy(enemy);
         System.out.println("Health of Enemy:"+enemy.getHealth());
-        Archer archer=new Archer("Vova");
+        Hero archer=new Archer("Archer");
         archer.attackEnemy(enemy);
         System.out.println("Health of Enemy:"+enemy.getHealth());
         enemy.setHealth(200);
+        Zombie zombie=new Zombie(120,"Zombie");
+        mage.attackEnemy(zombie);
+        mage.attackEnemy(enemy);
+        System.out.println(enemy.getHealth());
+        System.out.println(zombie.getHealth());
+        System.out.println("Health of "+mage.name+": "+mage.getHealth());
 
     }
+
 }

@@ -1,7 +1,4 @@
-package com.company.lecture1;
-
-import com.company.lecture1.Objects.Atm;
-import com.company.lecture1.Objects.IntervalOfTime;
+package com.lectures.lecture3_4;
 
 import java.util.Scanner;
 public class Lecture3_4Tasks {
@@ -48,7 +45,7 @@ public class Lecture3_4Tasks {
         System.out.println("Задание 2, банкомат");
         Atm FirstAtm=new Atm(1,1,1);
         Atm SecondAtm= new Atm();
-        FirstAtm.setCash(5,2,1);
+        FirstAtm.setCash(100,100,100);
         Scanner in = new Scanner(System.in);
         System.out.println("Введите сумму снятия наличных:");
         int cash=in.nextInt();

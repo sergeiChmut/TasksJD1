@@ -1,12 +1,12 @@
-package com.company.lecture1.Objects;
+package com.lectures.lecture6;
 
 public class Warrior extends Hero {
     public Warrior(String name) {
         super(name);
     }
-    @Override
+
     public void attackEnemy(Enemy enemy) {
         enemy.takeDamage(10);
-        System.out.println("Warrior attack Enemy!");
+        System.out.println(name+" attack "+enemy.getName()+"!");
     }
 }
