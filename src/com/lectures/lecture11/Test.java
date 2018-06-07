@@ -29,13 +29,13 @@ public class Test {
     public static void main(String[] args) {
 
 
-        //task1();
-        //task2();
-        //task3();
-        //task4();
-        //task5();
-        //task6();
-        task7();
+        task1();
+//        task2();
+//        task3();
+//        task4();
+//        task5();
+//        task6();
+//        task7();
 
     }
 
@@ -51,7 +51,6 @@ public class Test {
             System.out.println("Ошибка! Некорректное значение");
             example = 0;
         }
-
     }
 
     private static void nullPointer() throws NullPointerException {

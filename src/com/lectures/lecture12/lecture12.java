@@ -23,11 +23,11 @@ import java.util.*;
 
 public class lecture12 {
     public static void main(String[] args) {
-        //task1();
-        //task2();
-        //task3();
-        //task4();
-        //task5();
+        task1();
+        task2();
+        task3();
+        task4();
+        task5();
         task6();
     }
 
@@ -38,27 +38,34 @@ public class lecture12 {
      */
 
     public static void task1() {
+        long[][] result = new long[3][10];
         long startTime = System.nanoTime();
         for (int i = 0; i < 10; i++) {
             long temp = System.nanoTime();
             calcString();
-            System.out.println(System.nanoTime() - temp);
+            result[0][i]= System.nanoTime() - temp;
         }
-        System.out.println(".");
         long endTime = System.nanoTime();
         long startTimeC = System.nanoTime();
         for (int i = 0; i < 10; i++) {
             long temp = System.nanoTime();
             calcConcat();
-            System.out.println(System.nanoTime() - temp);
+            result[1][i]= System.nanoTime() - temp;
         }
-        System.out.println(".");
         long endTimeC = System.nanoTime();
         long startTimeB = System.nanoTime();
         for (int i = 0; i < 10; i++) {
             long temp = System.nanoTime();
             calcStringBuilder();
-            System.out.println(System.nanoTime() - temp);
+            result[2][i]= System.nanoTime() - temp;
+        }
+        System.out.println("intervalOfString+   "+"intervalOfConcat   "+"intervalOfBuilder");
+        for (int i=0;i<10;i++) {
+            for (int j=0;j<3;j++) {
+                System.out.printf("%16s",result[j][i]);
+                //System.out.print("    "+result[j][i]+"       ");
+            }
+            System.out.println("");
         }
         long endTimeB = System.nanoTime();
         System.out.println("Time String+     :" + (endTime - startTime) + "\nTime StringConcat: " + (endTimeC - startTimeC) +
@@ -70,7 +77,6 @@ public class lecture12 {
         String s2 = "S ";
         for (int i = 0; i < 1000; i++) {
             s1 = s1 + s2;
-            //System.out.println(s1);
         }
     }
 
@@ -79,7 +85,6 @@ public class lecture12 {
         StringBuilder s1 = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             s1 = s1.append(s2);
-            //System.out.println(s1);
         }
     }
 
@@ -88,7 +93,6 @@ public class lecture12 {
         String s2 = "S ";
         for (int i = 0; i < 1000; i++) {
             s1 = s1.concat(s2);
-            //System.out.println(s1);
         }
     }
 
@@ -125,8 +129,7 @@ public class lecture12 {
     }
 
     public static boolean wordInStartEndString(String string, String word) {
-        if ((string.indexOf(word) == 0) && ((string.indexOf(word, word.length()) == (string.length() - word.length())) ||
-                (string.length() == word.length()))) {
+        if (string.startsWith(word)&&string.endsWith(word)) {
             return true;
         }
         return false;
@@ -161,22 +164,25 @@ public class lecture12 {
         Scanner in = new Scanner(System.in);
         System.out.println("\nВведите строку для посчета слов :");
         String string = in.nextLine();
-        System.out.println(calculateWord(string));
+        System.out.println("Количество слов в строке : "+calculateWord(string));
     }
 
     public static int calculateWord(String string) {
-        int word = 0;
+        int numberOfWord = 1;
         char[] charOfString = string.toCharArray();
+        if (charOfString.length == 0) {
+            return 0;
+        }
         for (int i = 1; i < string.length(); i++) {
             boolean indexChar = (((int) charOfString[i] > 31) && ((int) charOfString[i] < 48)) ||
                     (((int) charOfString[i] > 57) && ((int) charOfString[i] < 65)) ||
                     (((int) charOfString[i] > 90) && ((int) charOfString[i] < 97)) ||
                     (((int) charOfString[i] > 122) && ((int) charOfString[i] < 128));
             if ((charOfString[i - 1] == ' ') && (!indexChar || (((int) charOfString[i] > 191) && ((int) charOfString[i] < 256)))) {
-                word++;
+                numberOfWord++;
             }
         }
-        return word;
+        return numberOfWord;
     }
 
     /**
@@ -188,6 +194,7 @@ public class lecture12 {
         Scanner in = new Scanner(System.in);
         System.out.println("\nВведите строку :");
         String string = in.nextLine();
+        //System.out.println(string.replaceAll(" +"," "));
         System.out.println("Строка без повторных символов :"+"\n"+deleteDoubleChar(string));
     }
 

@@ -5,7 +5,7 @@ class LoggerEx {
 
     public static void main(String[] args) {
         LoggerEx obj = new LoggerEx();
-        obj.runMe("Serge");
+        obj.runMe("exam");
     }
 
     private void runMe(String parameter) {
