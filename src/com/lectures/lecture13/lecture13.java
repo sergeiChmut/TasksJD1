@@ -25,11 +25,11 @@ import java.util.regex.Pattern;
  */
 public class lecture13 {
     public static void main(String[] args) {
-//        task1();
-//        task2();
+        task1();
+        task2();
         task3();
-//        task4();
-//        task5();
+        task4();
+        task5();
 
     }
 
@@ -67,7 +67,6 @@ public class lecture13 {
         }
     }
     /**3. Написать программу, выполняющую поиск в строке всех тегов абзацев, в т.ч. тех, у которых есть параметры, например <p id ="p1">,
-     *  тех, у которых есть параметры, например <p id ="p1">,
      * и замену их на простые теги абзацев <p>.
      *
      */
@@ -75,7 +74,8 @@ public class lecture13 {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите строку :");
         String string = in.nextLine();
-        System.out.println(string.replaceAll("<p?.{0,}>","<P>"));
+        string=string.replaceAll("<p?.{0,}>","<P>");
+        System.out.println(string);
     }
 
     /**4. Написать программу, выполняющую поиск в строке мобильных телефонных номеров в формате +375XXYYYYYYY
@@ -106,15 +106,20 @@ public class lecture13 {
         String exp3 = "00.100.10.0";
         String exp4 = "101.0.5.15";
         String exp5 = "0.15.0.105";
+        String exp6 = "25.205.255.256";
+        String exp7 = "25.205.255.255";
+
         System.out.println(exp1+"  "+isIPv4(exp1));
         System.out.println(exp2+"  "+isIPv4(exp2));
         System.out.println(exp3+"  "+isIPv4(exp3));
         System.out.println(exp4+"  "+isIPv4(exp4));
         System.out.println(exp5+"  "+isIPv4(exp5));
+        System.out.println(exp6+"  "+isIPv4(exp6));
+        System.out.println(exp7+"  "+isIPv4(exp7));
 
     }
     public static boolean isIPv4(String string) {
-        Pattern iPv4 = Pattern.compile("((([1-9][0-9]\\d)|([1-9]?[1-9]?\\d))\\.){3}(([1-9][0-9]\\d)|([1-9]?[1-9]?\\d))");
+        Pattern iPv4 = Pattern.compile("((([12][0-5][0-5])|([1-2]?[1-5]?[0-5]))\\.){3}(([12][0-5][0-5])|([1-2]?[1-5]?[0-5]))");
         Matcher matcher=iPv4.matcher(string);
         if (matcher.find()&&(matcher.group().length() == string.length())) {
             return true;

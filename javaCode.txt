@@ -1,0 +1,127 @@
+public class lecture14 {
+    public static void main(String[] args) {
+        tasks1_5();
+//        task6();
+        task7();
+
+    }
+
+    private static void tasks1_5() {
+        try (FileInputStream fis = new FileInputStream("data.txt");
+             FileOutputStream fos = new FileOutputStream("intnumber.txt");
+             InputStreamReader is = new InputStreamReader(fis);
+             BufferedReader bis = new BufferedReader(is);
+             OutputStreamWriter osw = new OutputStreamWriter(System.out);
+             BufferedWriter bw = new BufferedWriter(osw);) {
+            task1(bis, bw);
+            fis.getChannel().position(0);
+            task2(bis, bw);
+            fis.getChannel().position(0);
+            task3(bis, bw);
+            fis.getChannel().position(0);
+            task4(bis, bw);
+            FileInputStream fis2 = new FileInputStream("intnumber.txt");
+            InputStreamReader is2 = new InputStreamReader(fis2);
+            BufferedReader bis2 = new BufferedReader(is2);
+            task5(fos, bis2, bw);
+
+        } catch (IOException e) {
+            System.err.print("ошибка ввода/вывода " + e);
+        }
+    }
+
+    /**
+     * 1. Задан файл с многострочным тестом. Прочитать и вывести этот файл в консоль построчно.
+     */
+    private static void task1(BufferedReader bis, BufferedWriter bw) throws IOException {
+        String line = "";
+        bw.write("TASK 1 :\n");
+        while ((line = bis.readLine()) != null) {
+            bw.write(line);
+            bw.newLine();
+        }
+    }
+
+    /**
+     * 2. Задан файл с текстом, найти и вывести в консоль все слова, начинающиеся с гласной буквы.
+     */
+    private static void task2(BufferedReader bis, BufferedWriter bw) throws IOException {
+        String line = "";
+        bw.write("\nTASK 2 (начинаются на гласную):\n");
+        while ((line = bis.readLine()) != null) {
+            String[] words = line.split(" ");
+            for (String word : words) {
+                if (word.matches("^[аеыоэяиюуАЕОЭЯИЮУ][а-яА-Я]+")) {
+                    bw.write(word + "  ");
+                }
+            }
+        }
+    }
+
+    /**
+     * 3. Задан файл с текстом, найти и вывести в консоль все слова,  для которых последняя буква одного
+     * слова совпадает с первой буквой следующего слова
+     */
+    private static void task3(BufferedReader bis, BufferedWriter bw) throws IOException {
+        bw.write("\nTASK 3 (последняя - первая буква равны) :\n");
+        String line = "";
+        while ((line = bis.readLine()) != null) {
+            String[] words = line.split(" ");
+            if (words.length > 1) {
+                for (int i = 1; i < words.length; i++) {
+                    if (words[i - 1].substring(words[i - 1].length() - 1).equalsIgnoreCase(words[i].substring(0, 1))) {
+                        bw.write(words[i - 1] + " - " + words[i] + "  ");
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 4. Задан файл с текстом. В каждой строке найти и вывести наибольшее число цифр, идущих подряд.
+     */
+    private static void task4(BufferedReader bis, BufferedWriter bw) throws IOException {
+        bw.write("\nTASK 4 (наибольшее число цифр подряд) :\n");
+        String line = "";
+        while ((line = bis.readLine()) != null) {
+            String[] words = line.split(" ");
+            String wordOfNumber = "";
+            for (int i = 0; i < words.length; i++) {
+                if ((words[i].matches("^\\d?\\d+")) && (words[i].length() > wordOfNumber.length())) {
+                    wordOfNumber = words[i];
+                }
+            }
+            if (!wordOfNumber.equalsIgnoreCase("")) {
+                bw.write(wordOfNumber + "  ");
+            }
+        }
+    }
+
+    /**
+     * 5. Записать в двоичный файл 20 случайных чисел типа int со значением >128. Прочитать записанный файл,
+     * распечатать числа и их среднее арифметическое.
+     */
+    private static void task5(FileOutputStream fos, BufferedReader bis, BufferedWriter bw) throws IOException {
+        bw.write("\nTASK 5 (числа) :\n");
+        int countOfNumbers = 20;
+        for (int i = 0; i < countOfNumbers; i++) {
+            Integer random = (int) (Math.random() * 127 + 128);
+            String randomToString = Integer.toString(random);
+            byte[] bytes = randomToString.getBytes();
+            fos.write(bytes);
+            fos.write(32);
+        }
+        int summa = 0;
+        int count = 1;
+        String line = "";
+        while ((line = bis.readLine()) != null) {
+            String[] words = line.split(" ");
+            for (String word : words) {
+                bw.write(word);
+                bw.write("  ");
+                summa += parseInt(word);
+                count++;
+            }
+        }
+        bw.write("\nСреднее арифметическое 20 случайных чисел равно : " + (summa / count));
+    }

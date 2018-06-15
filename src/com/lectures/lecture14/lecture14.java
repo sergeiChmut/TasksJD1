@@ -2,8 +2,6 @@ package com.lectures.lecture14;
 
 import java.io.*;
 
-import static java.lang.Integer.parseInt;
-
 /**
  * 1. Задан файл с многострочным тестом. Прочитать и вывести этот файл в консоль построчно.
  * <p>
@@ -22,7 +20,15 @@ import static java.lang.Integer.parseInt;
  */
 public class lecture14 {
     public static void main(String[] args) {
-        try (FileInputStream fis = new FileInputStream("data.txt"); FileOutputStream fos = new FileOutputStream("intnumber.txt");
+//        tasks1_5();
+//        task6();
+        task7();
+
+    }
+
+    private static void tasks1_5() {
+        try (FileInputStream fis = new FileInputStream("data.txt");
+             FileOutputStream fos = new FileOutputStream("intnumber.txt");
              InputStreamReader is = new InputStreamReader(fis);
              BufferedReader bis = new BufferedReader(is);
              OutputStreamWriter osw = new OutputStreamWriter(System.out);
@@ -34,17 +40,12 @@ public class lecture14 {
             task3(bis, bw);
             fis.getChannel().position(0);
             task4(bis, bw);
-//            fis.close();is.close();bis.close();
             FileInputStream fis2 = new FileInputStream("intnumber.txt");
-            InputStreamReader is2 = new InputStreamReader(fis2);
-            BufferedReader bis2 = new BufferedReader(is2);
-            task5(fos, bis2, bw);
+            task5(fos, fis2, bw);
 
-            
         } catch (IOException e) {
             System.err.print("ошибка ввода/вывода " + e);
         }
-
     }
 
     /**
@@ -66,7 +67,7 @@ public class lecture14 {
         String line = "";
         bw.write("\nTASK 2 (начинаются на гласную):\n");
         while ((line = bis.readLine()) != null) {
-            String[] words = line.split(" ");
+            String[] words = line.split(" +");
             for (String word : words) {
                 if (word.matches("^[аеыоэяиюуАЕОЭЯИЮУ][а-яА-Я]+")) {
                     bw.write(word + "  ");
@@ -83,7 +84,7 @@ public class lecture14 {
         bw.write("\nTASK 3 (последняя - первая буква равны) :\n");
         String line = "";
         while ((line = bis.readLine()) != null) {
-            String[] words = line.split(" ");
+            String[] words = line.split(" +");
             if (words.length > 1) {
                 for (int i = 1; i < words.length; i++) {
                     if (words[i - 1].substring(words[i - 1].length() - 1).equalsIgnoreCase(words[i].substring(0, 1))) {
@@ -101,7 +102,7 @@ public class lecture14 {
         bw.write("\nTASK 4 (наибольшее число цифр подряд) :\n");
         String line = "";
         while ((line = bis.readLine()) != null) {
-            String[] words = line.split(" ");
+            String[] words = line.split(" +");
             String wordOfNumber = "";
             for (int i = 0; i < words.length; i++) {
                 if ((words[i].matches("^\\d?\\d+")) && (words[i].length() > wordOfNumber.length())) {
@@ -118,27 +119,33 @@ public class lecture14 {
      * 5. Записать в двоичный файл 20 случайных чисел типа int со значением >128. Прочитать записанный файл,
      * распечатать числа и их среднее арифметическое.
      */
-    private static void task5(FileOutputStream fos, BufferedReader bis, BufferedWriter bw) throws IOException {
+    private static void task5(FileOutputStream fos, FileInputStream fis, BufferedWriter bw) throws IOException {
         bw.write("\nTASK 5 (числа) :\n");
         int countOfNumbers = 20;
+        int random;
         for (int i = 0; i < countOfNumbers; i++) {
-            Integer random = (int) (Math.random() * 127 + 128);
-            String randomToString = Integer.toString(random);
-            byte[] bytes = randomToString.getBytes();
-            fos.write(bytes);
-            fos.write(32);
-        }
-        int summa = 0;
-        int count = 1;
-        String line = "";
-        while ((line = bis.readLine()) != null) {
-            String[] words = line.split(" ");
-            for (String word : words) {
-                bw.write(word);
-                bw.write("  ");
-                summa += parseInt(word);
-                count++;
+            if (i<(countOfNumbers/2)) {
+                random = (int) (Math.random() * 2000000000 + 256);
+            } else {
+                random = (int) (Math.random() * 20000 + 256);
             }
+            fos.write(((random >>> 24) & 0xFF));
+            fos.write(((random >>> 16) & 0xFF));
+            fos.write(((random >>> 8) & 0xFF));
+            fos.write(((random >>> 0) & 0xFF));
+        }
+        long summa = 0;
+        int count = 0;
+        int temp = 0;
+        while ((temp = fis.read()) != -1) {
+            int ch1 = temp;
+            int ch2 = fis.read();
+            int ch3 = fis.read();
+            int ch4 = fis.read();
+            int number = ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
+            bw.write(number+" ");
+            summa += number;
+            count++;
         }
         bw.write("\nСреднее арифметическое 20 случайных чисел равно : " + (summa / count));
     }
@@ -148,13 +155,50 @@ public class lecture14 {
      * Для этого использовать рекурсию (пример рекурсии тут и тут).
      */
     private static void task6() {
+        File root = File.listRoots()[1];
+        System.out.println(root.getFreeSpace());
+        File[] files = root.listFiles();
+        recDir(files);
+    }
 
+    private static File[] recDir(File[] listFiles) {
+        for (int i = 0; i < listFiles.length; i++) {
+            System.out.println(listFiles[i]);
+            if (!(listFiles[i].isHidden()) && (listFiles[i].isDirectory())) {
+                recDir(listFiles[i].listFiles());
+            }
+        }
+        return null;
     }
 
     /**
      * 7. Задан файл с java-кодом. Прочитать текст программы из файла и записать в другой файл в обратном порядке символы каждой строки.
      */
     private static void task7() {
+        try (FileInputStream fis3 = new FileInputStream("javaCode.txt");
+             FileOutputStream fos2 = new FileOutputStream("javaEdoc.txt");
+             InputStreamReader is3 = new InputStreamReader(fis3);
+             BufferedReader bis3 = new BufferedReader(is3);
+             OutputStreamWriter osw2 = new OutputStreamWriter(fos2);
+             BufferedWriter bw2 = new BufferedWriter(osw2);) {
+            // task7(bis3, bw2);
+            String line = "";
+            while ((line = bis3.readLine()) != null) {
+                StringBuilder lineInvert = new StringBuilder();
+                char[] symbols = line.toCharArray();
+                if (symbols.length > 1) {
+                    int i = symbols.length - 1;
+                    while (i != -1) {
+                        lineInvert = lineInvert.append(symbols[i]);
+                        i--;
+                    }
+                    bw2.write(String.valueOf(lineInvert));
+                    bw2.write(10);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
