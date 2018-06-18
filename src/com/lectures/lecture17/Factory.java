@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,22 +16,32 @@ import java.util.List;
 public class Factory {
     private static final List<String> DETAILS = Arrays.asList("Голова", "Тело", "Левая рука", "Правая рука", "Левая нога", "Правая нога",
             "CPU", "RAM", "HDD");
-    public LinkedList<String> detailsForDay;
-    public boolean end = false;
-    private final static int COUNT_DETAILS_FOR_DAY = 4;
-    private final static int COUNT_OF_DAY = 100;
-    private final static int LENGHT_OF_DAY_MS = 100;
+    private LinkedList<String> detailsForDay;
+    private boolean competitionEnd = false; // Окончание соревнования
+    private static final int COUNT_DETAILS_FOR_DAY = 4;
+    private static final int COUNT_OF_DAY = 100;
+    private static final int LENGHT_OF_DAY_MS = 100;
+    final Lock factoryLock = new ReentrantLock();
 
-    public LinkedList<String> getDetails(int countDetToGet, String name) throws InterruptedException {
-        synchronized (this) {
+
+    LinkedList<String> getDetails(int countDetToGet, String name) throws InterruptedException {
+//        synchronized (this) {
+        factoryLock.lock();
+        try {
             LinkedList<String> details = new LinkedList<>();
+//            System.out.println(detailsForDay.size());
             while ((detailsForDay.size() != 0) && (countDetToGet != 0)) {
                 details.addLast(detailsForDay.removeLast());
                 countDetToGet--;
-                Thread.sleep(30);
             }
+            Thread.sleep(55);
             return details;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            factoryLock.unlock();
         }
+        return null;
     }
 
     private void newDay() {
@@ -42,7 +54,6 @@ public class Factory {
     private void firstDay() {
         detailsForDay = new LinkedList<String>();
         for (int i = 0; i < 20; i++) {
-
             int indexRandomDetail = (int) (Math.random() * 9);
             detailsForDay.addLast(DETAILS.get(indexRandomDetail));
         }
@@ -60,6 +71,15 @@ public class Factory {
             Thread.sleep(LENGHT_OF_DAY_MS);
             factory.newDay();
         }
-        factory.setEnd(true);
+        factory.setCompetitionEnd(true);
+        Thread.sleep(200);
+        if (servant1.getCountRobot() == servant2.getCountRobot()) {
+            System.out.println("\nНичья!  Победила дружба!");
+        } else if (servant1.getCountRobot() > servant2.getCountRobot()) {
+            System.out.println("\n Победил Первый Ученый ! ");
+        } else {
+            System.out.println("\n Победил Второй Ученый ! ");
+        }
+
     }
 }

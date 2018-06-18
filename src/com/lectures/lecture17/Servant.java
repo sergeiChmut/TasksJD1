@@ -6,38 +6,34 @@ import lombok.Data;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
-
-
-
 @AllArgsConstructor
 @Data
 public class Servant implements Runnable {
     Factory factory;
-    public int countDetToGet;
+    public int countDetailsToGet;
     private String name;
     private LinkedHashSet<String> details;
-    public LinkedList<String> detailsForDay;
-    private int countDetails;
+    private LinkedList<String> detailsForDay;
+    private int countDetailsCollect;
     private int countRobot;
 
-    public Servant(Factory factory, String name) {
+    Servant(Factory factory, String name) {
         this.factory = factory;
         this.name = name;
     }
 
-    private int robot(Factory factory) throws InterruptedException {
-        countDetToGet = (int) (Math.random() * 4 + 1);
-        detailsForDay = factory.getDetails(countDetToGet, name);
+    private void makeRobot(Factory factory) throws InterruptedException {
+        countDetailsToGet = (int) (Math.random() * 4 + 1);
+        detailsForDay = factory.getDetails(countDetailsToGet, name);
         for (int i = 0; i < detailsForDay.size(); i++) {
             details.add(detailsForDay.removeFirst());
-            countDetails++;
+            countDetailsCollect++;
         }
         if (details.size() == 9) {
             countRobot++;
             System.out.printf("\nУра! %s собрал для него робота! Всего: %d", name, countRobot);
             details.clear();
         }
-        return countRobot;
     }
 
 
@@ -46,14 +42,14 @@ public class Servant implements Runnable {
         details = new LinkedHashSet<>();
         countRobot = 0;
         System.out.printf("\n%s приступил к сбору", name);
-        while (!factory.end) {
+        while (!factory.isCompetitionEnd()) {
             try {
-                countRobot = robot(factory);
+                makeRobot(factory);
 //                System.out.println(countDetails + name);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.printf("\n %s и ученый закончили и собрали %d роботов!!! (было собрано %d деталей)", name, countRobot, countDetails);
+        System.out.printf("\n %s и ученый закончили и собрали %d роботов!!! (было собрано %d деталей)", name, countRobot, countDetailsCollect);
     }
 }
