@@ -1,0 +1,119 @@
+{ 41erutcel ssalc cilbup
+{ )sgra ][gnirtS(niam diov citats cilbup    
+;)(5_1sksat        
+;)(6ksat        //
+;)(7ksat        
+}    
+{ )(5_1sksat diov citats etavirp    
+;)"txt.atad"(maertStupnIeliF wen = sif maertStupnIeliF( yrt        
+;)"txt.rebmuntni"(maertStuptuOeliF wen = sof maertStuptuOeliF             
+;)sif(redaeRmaertStupnI wen = si redaeRmaertStupnI             
+;)si(redaeRdereffuB wen = sib redaeRdereffuB             
+;)tuo.metsyS(retirWmaertStuptuO wen = wso retirWmaertStuptuO             
+{ );)wso(retirWdereffuB wen = wb retirWdereffuB             
+;)wb ,sib(1ksat            
+;)0(noitisop.)(lennahCteg.sif            
+;)wb ,sib(2ksat            
+;)0(noitisop.)(lennahCteg.sif            
+;)wb ,sib(3ksat            
+;)0(noitisop.)(lennahCteg.sif            
+;)wb ,sib(4ksat            
+;)"txt.rebmuntni"(maertStupnIeliF wen = 2sif maertStupnIeliF            
+;)2sif(redaeRmaertStupnI wen = 2si redaeRmaertStupnI            
+;)2si(redaeRdereffuB wen = 2sib redaeRdereffuB            
+;)wb ,2sib ,sof(5ksat            
+{ )e noitpecxEOI( hctac }        
+;)e + " адовыв/адовв акбишо"(tnirp.rre.metsyS            
+}        
+}    
+**/    
+.ончортсоп ьлоснок в лйаф тотэ итсевыв и ьтатичорП .мотсет мынчортсогонм с лйаф надаЗ .1 *     
+/*     
+{ noitpecxEOI sworht )wb retirWdereffuB ,sib redaeRdereffuB(1ksat diov citats etavirp    
+;"" = enil gnirtS        
+;)"n\: 1 KSAT"(etirw.wb        
+{ )llun =! ))(eniLdaer.sib = enil(( elihw        
+;)enil(etirw.wb            
+;)(eniLwen.wb            
+}        
+}    
+**/    
+.ывкуб йонсалг с ясеищюаничан ,аволс есв ьлоснок в итсевыв и итйан ,мотскет с лйаф надаЗ .2 *     
+/*     
+{ noitpecxEOI sworht )wb retirWdereffuB ,sib redaeRdereffuB(2ksat diov citats etavirp    
+;"" = enil gnirtS        
+;)"n\:)юунсалг ан ястюаничан( 2 KSATn\"(etirw.wb        
+{ )llun =! ))(eniLdaer.sib = enil(( elihw        
+;)" "(tilps.enil = sdrow ][gnirtS            
+{ )sdrow : drow gnirtS( rof            
+{ ))"+]Я-Ая-а[]УЮИЯЭОЕАуюияэоыеа[^"(sehctam.drow( fi                
+;)"  " + drow(etirw.wb                    
+}                
+}            
+}        
+}    
+**/    
+огондо авкуб яянделсоп хыроток ялд  ,аволс есв ьлоснок в итсевыв и итйан ,мотскет с лйаф надаЗ .3 *     
+аволс огещюуделс йовкуб йовреп с теадапвос аволс *     
+/*     
+{ noitpecxEOI sworht )wb retirWdereffuB ,sib redaeRdereffuB(3ksat diov citats etavirp    
+;)"n\: )ынвар авкуб яавреп - яянделсоп( 3 KSATn\"(etirw.wb        
+;"" = enil gnirtS        
+{ )llun =! ))(eniLdaer.sib = enil(( elihw        
+;)" "(tilps.enil = sdrow ][gnirtS            
+{ )1 > htgnel.sdrow( fi            
+{ )++i ;htgnel.sdrow < i ;1 = i tni( rof                
+{ )))1 ,0(gnirtsbus.]i[sdrow(esaCerongIslauqe.)1 - )(htgnel.]1 - i[sdrow(gnirtsbus.]1 - i[sdrow( fi                    
+;)"  " + ]i[sdrow + " - " + ]1 - i[sdrow(etirw.wb                        
+}                    
+}                
+}            
+}        
+}    
+**/    
+.дярдоп хищуди ,рфиц олсич еешьлобиан итсевыв и итйан екортс йоджак В .мотскет с лйаф надаЗ .4 *     
+/*     
+{ noitpecxEOI sworht )wb retirWdereffuB ,sib redaeRdereffuB(4ksat diov citats etavirp    
+;)"n\: )дярдоп рфиц олсич еешьлобиан( 4 KSATn\"(etirw.wb        
+;"" = enil gnirtS        
+{ )llun =! ))(eniLdaer.sib = enil(( elihw        
+;)" "(tilps.enil = sdrow ][gnirtS            
+;"" = rebmuNfOdrow gnirtS            
+{ )++i ;htgnel.sdrow < i ;0 = i tni( rof            
+{ )))(htgnel.rebmuNfOdrow > )(htgnel.]i[sdrow( && ))"+d\\?d\\^"(sehctam.]i[sdrow(( fi                
+;]i[sdrow = rebmuNfOdrow                    
+}                
+}            
+{ ))""(esaCerongIslauqe.rebmuNfOdrow!( fi            
+;)"  " + rebmuNfOdrow(etirw.wb                
+}            
+}        
+}    
+**/    
+,лйаф йыннасипаз ьтатичорП .821> меинечанз ос tni апит лесич хынйачулс 02 лйаф йынчиовд в ьтасипаЗ .5 *     
+.еоксечитемфира еендерс хи и алсич ьтатачепсар *     
+/*     
+{ noitpecxEOI sworht )wb retirWdereffuB ,sib redaeRdereffuB ,sof maertStuptuOeliF(5ksat diov citats etavirp    
+;)"n\: )алсич( 5 KSATn\"(etirw.wb        
+;02 = srebmuNfOtnuoc tni        
+{ )++i ;srebmuNfOtnuoc < i ;0 = i tni( rof        
+;)821 + 721 * )(modnar.htaM( )tni( = modnar regetnI            
+;)modnar(gnirtSot.regetnI = gnirtSoTmodnar gnirtS            
+;)(setyBteg.gnirtSoTmodnar = setyb ][etyb            
+;)setyb(etirw.sof            
+;)23(etirw.sof            
+}        
+;0 = ammus tni        
+;1 = tnuoc tni        
+;"" = enil gnirtS        
+{ )llun =! ))(eniLdaer.sib = enil(( elihw        
+;)" "(tilps.enil = sdrow ][gnirtS            
+{ )sdrow : drow gnirtS( rof            
+;)drow(etirw.wb                
+;)"  "(etirw.wb                
+;)drow(tnIesrap =+ ammus                
+;++tnuoc                
+}            
+}        
+;))tnuoc / ammus( + " : онвар лесич хынйачулс 02 еоксечитемфира еендерСn\"(etirw.wb        
+}    
